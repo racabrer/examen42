@@ -30,6 +30,7 @@ RETURN VALUES
      The strpbrk() function return a pointer to the first occurence of any character
      in the string,if no characters occur anywhere in s, strpbrk() returns NULL.
 */
+#include <stddef.h>
 
 char *ft_strpbrk(const char *s1, const char *s2)
 {
@@ -43,7 +44,7 @@ char *ft_strpbrk(const char *s1, const char *s2)
 		while(s2[j])
 		{
 			if (s2[j] == s1[i])
-				return(s1[i]);
+				return((char *)&s1[i]);
 			j++;
 		}
 		i++;
