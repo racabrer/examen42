@@ -33,3 +33,39 @@ int ascending(int a, int b)
 }
 
 */
+
+#include "sort_list.h"
+
+t_list	*sort_list(t_list* lst, int (*cmp)(int, int))
+{
+	int swapped;
+	int temp;
+	t_list *current;
+
+	if (!lst)
+		return (NULL);
+	swapped = 1;
+	while (swapped)
+	{
+		swapped = 0;
+		current = lst;
+		while (current -> next)
+		{
+			if (!cmp(current->data), current->next->data)
+			{
+				temp = current->data;
+				current->data = current->next->data;
+				current->next->data = temp;
+				swapped = 1; 
+			}
+			current = current->next;
+		}
+	}
+	return (lst);
+}
+
+/*
+Recorre la lista muchas veces.
+Intercambia datos si están mal ordenados.
+Si no se intercambió nada en una pasada, la lista está ordenada.
+*/

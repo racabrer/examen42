@@ -40,8 +40,25 @@ $>
 4. Imprimir el resto de palabras.
 5. Imprimir la primera palabra al final.
 6. Terminar con \n.
-*/
 
+1. Comprobar argumentos
+    Si no hay exactamente un argumento, escribe solo un salto de línea (\n) y termina.
+2. Saltar espacios iniciales
+    Ignora todos los espacios (' ') y tabulaciones ('\t') al inicio de la cadena.
+3. Detectar la primera palabra
+    Guarda los índices start y end de la primera palabra (la que hay que mover al final).
+    Avanza el índice para buscar otras palabras.
+4. Recorrer el resto de la cadena
+    Por cada palabra que encuentres (después de la primera):
+    Sáltate los espacios/tabs entre palabras.
+    Encuentra el inicio y el final de la siguiente palabra.
+    Imprímela con un espacio antes si ya imprimiste alguna.
+5. Imprimir la primera palabra al final
+    Si se imprimieron otras palabras antes, añade un espacio.
+    Luego imprime la palabra guardada en el paso 3.
+6. Terminar con salto de línea
+    Siempre imprime un \n al final. 
+*/
 #include <unistd.h>
 #include <stdlib.h>
 
