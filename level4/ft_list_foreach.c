@@ -24,4 +24,18 @@ typedef struct    s_list
     void          *data;
 }                 t_list;
 
+
+Recorre todos los nodos de la lista empezando por begin_list.
+A cada nodo, le aplica la función f al dato (data).
 */
+
+#include "ft_list_foreach.h"
+
+void    ft_list_foreach(t_list *begin_list, void (*f)(void *))
+{
+    while(begin_list)
+    {
+        (*f)(begin_list->data); // aplica la función al contenido
+        begin_list = begin_list->next; // pasa al siguiente nodo
+    }
+}

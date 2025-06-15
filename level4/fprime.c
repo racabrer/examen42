@@ -33,3 +33,40 @@ $
 $> ./fprime 42 21 | cat -e
 $
 */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main (int argc, char **argv)
+{
+    int n;
+    int first;
+    int i;
+
+    n = atoi(argv[1]);
+    first = 1;
+    i = 2;
+
+    if (argc == 2)
+    {
+        while(n > 1)
+        {
+            if (n % i == 0)
+            {
+                if (!first)
+                    printf("*");
+                printf("%d", i);
+                first = 0; //marcamos que ya imprimimos el primer número
+                n /= i; // divide n entre i y guarda el resultado de nuevo en n
+            }
+            else 
+            {
+                i++;
+            }
+        }
+        printf("\n");
+        return (0);
+    }
+    printf("\n");
+    return (0);
+}
