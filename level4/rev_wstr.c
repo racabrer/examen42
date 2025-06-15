@@ -29,3 +29,37 @@ $> ./rev_wstr | cat -e
 $
 $>
 */
+
+#include <unistd.h>
+
+int main (int argc, char **argv)
+{
+    int i;
+    int j;
+    int first_word;
+
+    i = 0;
+    first_word = 0;
+    if (argc == 2)
+    {
+        while (argv[1][i] != '\0')
+            i++;
+        i--;
+        while (i >= 0)
+        {
+            while( i >= 0 && (argv[1][i] == ' ' || argv[1][i] == '\t'))
+                i--;
+            j = i;
+            while (j >= 0 && (argv[1][i] != '\0' || argv[1][i] != '\t'))
+                j--;
+            if (first_word)
+                write (1, " ", 1);
+            write(1, &argv[j + 1], i - j);
+            first_word = 1;
+            i = j;
+        }
+        
+    }
+    write(1, "\n", 1);
+    return (0);
+}

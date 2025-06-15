@@ -34,4 +34,85 @@ $>./rostring | cat -e
 $
 $>
 
+1. Verificar que hay al menos un argumento.
+2. Saltar espacios iniciales.
+3. Guardar la primera palabra.
+4. Imprimir el resto de palabras.
+5. Imprimir la primera palabra al final.
+6. Terminar con \n.
 */
+
+#include <unistd.h>
+#include <stdlib.h>
+
+// Función para verificar si un carácter es espacio o tab
+int is_space (char c)
+{
+    return (c == ' ' || c == '\t');
+}
+
+// Función para escribir una cadena
+void putstr (char *str, int len)
+{
+    write(1, &str, len);
+}
+
+int main (int argc, char **argv)
+{
+    int i;
+    int start;
+    int end;
+    int first;
+    char *str;
+
+    i = 0;
+    start = 0;
+    end = 0;
+    first = 1;
+    str = NULL;
+
+    if (argc < 2 || !argv[1][0])
+    {
+        write (1, "\n", 1);
+        return (0);
+    }
+    str = argv[1];
+
+    // Saltar espacios iniciales 
+    while (is_space(str[i]))
+        i++;
+    // Guardar primera palabra 
+    start = i;
+    while(str[i] && !is_space(str[i]))
+        i++;
+    end = i;
+    // Imprimir las siguientes palabras
+    while (str[i])
+    {
+        // Saltar espacios entre palabras
+        while (is_space && is_space(str[i]))
+            i++;
+        if (str[i] && !is_space(str[i]))
+        {
+            if (!first)
+                write(1, " ", 1);
+            first = 0;
+
+            // Imprimir palabra
+            int j = i;
+            while (str[j] && !is_space(str[j]))
+                j++;
+            putstr(&str[i], j - i);
+            i = j;
+        }
+    }
+    // Imprimir la primera palabra al final (si había más palabras)
+    if (!first)
+        write(1, " ", 1);
+    putstr(&str[start], end - start);
+    write (1, '\n', 1);
+    return (0);
+}
+
+
+
