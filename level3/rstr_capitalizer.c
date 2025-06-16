@@ -46,23 +46,49 @@ void ft_putchar(char c)
 	write(1, &c, 1);
 }
 
-void r_capitalizer(char *s)
+int ft_isalpha(char c)
 {
-	int i; 
+	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
+}
+
+char to_lower(char c)
+{
+	if (c >= 'A' && c <= 'Z')
+		return (c + 32);
+	return (c);
+}
+
+char to_upper(char c)
+{
+	if (c >= 'a' && c <= 'z')
+		return (c - 32);
+	return (c);
+}
+
+void	r_capitalizer(char *s)
+{
+	int i;
+	char c;
+	char next;
 
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] >= 'A' && s[i] <= 'Z')
-			s[i] += 32;
-		if ((s[i] >= 'a' && s[i] <= 'z') && ft_isspace(s[i +1])) 
-			s[i] -= 32;
-		ft_putchar(s[i]);
+		c = s[i];
+		next = s[i + 1];
+
+		if (ft_isalpha(c))
+			c = to_lower(c);
+
+		if (ft_isalpha(c) && (!ft_isalpha(next)))
+			c = to_upper(c);
+
+		ft_putchar(c);
 		i++;
 	}
 }
 
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
 	int i = 1;
 
@@ -73,7 +99,7 @@ int main (int argc, char **argv)
 		while (i < argc)
 		{
 			r_capitalizer(argv[i]);
-			if ( i < argc - 1)
+			if (i < argc - 1)
 				ft_putchar(' ');
 			i++;
 		}
