@@ -57,7 +57,7 @@ void capitalizer(char *s)
 				s[i] -= 32;
 			new_word = 0;
 		}
-		else if (ft_isspace(s[i-]))
+		else if (ft_isspace(s[i]))
 			new_word = 1;
 		else 
 			new_word = 0;
