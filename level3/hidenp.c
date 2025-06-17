@@ -36,20 +36,28 @@ Funcionamiento:
 */
 
 
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
-	int i = 0;
-	int j = 0;
-
-	if( argc == 3)
+	int i;
+	int j;
+	
+	i = 0;
+	j = 0;
+	if (argc == 3)
 	{
-		while (argv[2][i] && argv[1][i])
-		{	
-			if (argv[2][j] && argv[1][i])
+		// argv[1] = s1, argv[2] = s2
+		while (argv[1][i] && argv[2][j])
+		{
+			if (argv[1][i] == argv[2][j])
 				i++;
-			j++; 
+			j++;
 		}
-		
+		if (argv[1][i] == '\0') // si llegamos al final de s1, fue escondido exitosamente
+			write(1, "1\n", 2);
+		else
+			write(1, "0\n", 2);
 	}
-	write (1, "\n", 1);
+	else
+		write(1, "\n", 1);
+	return (0);
 }
