@@ -45,7 +45,6 @@ int main(int argc, char **argv)
 	j = 0;
 	if (argc == 3)
 	{
-		// argv[1] = s1, argv[2] = s2
 		while (argv[1][i] && argv[2][j])
 		{
 			if (argv[1][i] == argv[2][j])
