@@ -28,24 +28,37 @@ $>
 
 #include <unistd.h>
 
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
-	int i;
+	int i, start;
 
 	if (argc == 2)
 	{
 		i = 0;
-		while (argv[1][i]) // getting to the end of the string
+		while (argv[1][i]) // buscar el final
 			i++;
 		i--;
-		while (argv[1][i] > 32) //looping over the whole string backwards until we found a space
+
+		// Saltar espacios/tabuladores al final
+		while (i >= 0 && (argv[1][i] == ' ' || argv[1][i] == '\t'))
 			i--;
-		i++;  //getting back to the end and writing the last word to the screen
-		while (argv[1][i])
+
+		// Marcar final de la palabra
+		int end = i;
+
+		// Buscar el inicio de la palabra
+		while (i >= 0 && argv[1][i] != ' ' && argv[1][i] != '\t')
+			i--;
+
+		start = i + 1;
+
+		// Imprimir la palabra
+		while (start <= end)
 		{
-			write (1, &argv[1][i], 1);
-			i++; 
+			write(1, &argv[1][start], 1);
+			start++;
 		}
 	}
-	write (1, "\n", 1);
+	write(1, "\n", 1);
+	return 0;
 }
