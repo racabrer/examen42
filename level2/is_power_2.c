@@ -22,6 +22,41 @@ int	    is_power_of_2(unsigned int n)
 		(since we have always multiplied this number by 2).
 	*/
 
+/*
+int	    is_power_of_2(unsigned int n)
+{
+    if (n == 0)
+        return (0);
+    while (n % 2 == 0)
+        n = n / 2;
+    return (n == 1);
+}
+
+#include <stdio.h>
+
+int is_power_of_2(unsigned int n);
+
+int main(void)
+{
+    printf("0: %d\n", is_power_of_2(0));
+    printf("1: %d\n", is_power_of_2(1));
+    printf("2: %d\n", is_power_of_2(2));
+    printf("3: %d\n", is_power_of_2(3));
+    printf("4: %d\n", is_power_of_2(4));
+    printf("5: %d\n", is_power_of_2(5));
+    printf("8: %d\n", is_power_of_2(8));
+    printf("16: %d\n", is_power_of_2(16));
+    printf("31: %d\n", is_power_of_2(31));
+    printf("32: %d\n", is_power_of_2(32));
+    printf("33: %d\n", is_power_of_2(33));
+    printf("64: %d\n", is_power_of_2(64));
+    printf("127: %d\n", is_power_of_2(127));
+    printf("128: %d\n", is_power_of_2(128));
+
+    return 0;
+}
+
+*/
 	int test;
 
 	test = 1;
