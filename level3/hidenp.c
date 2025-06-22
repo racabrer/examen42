@@ -45,11 +45,11 @@ int main(int argc, char **argv)
 	j = 0;
 	if (argc == 3)
 	{
-		while (argv[1][i] && argv[2][j])
+		while (argv[1][i] && argv[2][j]) // mientras queden letras en s2 y en s1
 		{
-			if (argv[1][i] == argv[2][j])
-				i++;
-			j++;
+			if (argv[1][i] == argv[2][j]) 	// si hay coincidencia 
+				i++;						// avanza en s1
+			j++;							// siempre avanza en s2
 		}
 		if (argv[1][i] == '\0') // si llegamos al final de s1, fue escondido exitosamente
 			write(1, "1\n", 2);

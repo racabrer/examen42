@@ -28,35 +28,36 @@ $>
 */
 #include <unistd.h>
 
-
-void ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
 int is_space(char c)
 {
-	return (c == ' ' || c == '\t' );
+    return (c == ' ' || c == '\t');
 }
+
 int main(int argc, char **argv)
 {
-	int i = 0;
-	int space = 0;
+    int i = 0;
+    int space = 0;
 
-	while (is_space(argv[1][i]))
-		i++;
-	while (argv[1][i])
-	{
-		if(is_space(argv[1][i]))
-			space = 1;
-		if(!is_space(argv[1][i]))
-		{
-			if(space)
-				ft_putchar(' ');
-			space = 0;
-			ft_putchar(argv[1][i]);
-		}
-		i++;
-	}
-	ft_putchar('\n');
+    if (argc == 2)
+    {
+        // Saltar espacios iniciales
+        while (is_space(argv[1][i]))
+            i++;
+
+        while (argv[1][i])
+        {
+            if (is_space(argv[1][i]))
+                space = 1;
+            else
+            {
+                if (space)
+                    write(1, " ", 1);
+                space = 0;
+                write(1, &argv[1][i], 1);
+            }
+            i++;
+        }
+    }
+    write(1, "\n", 1);
+    return 0;
 }
