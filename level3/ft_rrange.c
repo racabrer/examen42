@@ -37,7 +37,7 @@ int	*ft_rrange(int start, int end)
 	while (len > 0)
 	{
 		if (end >= start)
-			r[len -1] = start ++;
+			r[len -1] = start++; // es len -1 porque se empieza desde el último elemento 
 		else
 			r[len - 1] = start--;
 		len--;
