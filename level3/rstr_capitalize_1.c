@@ -1,6 +1,3 @@
-Otra versión de rstr_capitalize
-
-
 #include <unistd.h>
 
 // Devuelve 1 si el carácter es una letra (a-z o A-Z), 0 si no lo es
@@ -61,4 +58,41 @@ void rstr_cap(char *str)
                 write(1, &upper, 1);                    // Imprimimos la versión mayúscula
             }
             word_start = 1;        // Ahora estamos al comienzo de una nueva palabra
-            last_letter_pos = -1;
+            last_letter_pos = -1;  // Reiniciamos el seguimiento de letras
+        }
+
+        // Imprimimos el carácter actual
+        write(1, &c, 1);
+        i++;
+    }
+
+    // Si terminamos el string pero aún teníamos una palabra activa, capitalizamos la última letra
+    if (last_letter_pos != -1)
+    {
+        upper = to_upper(str[last_letter_pos]);
+        write(1, "\b", 1);
+        write(1, &upper, 1);
+    }
+}
+
+// Función main que recibe los argumentos desde la línea de comandos
+int main(int argc, char **argv)
+{
+    int i;
+
+    i = 1;
+    // Si no se pasan argumentos, imprimimos solo un salto de línea
+    if (argc == 1)
+        write(1, "\n", 1);
+    else
+    {
+        // Procesamos cada argumento por separado
+        while (i < argc)
+        {
+            rstr_cap(argv[i]);     // Aplicamos la conversión al argumento
+            write(1, "\n", 1);      // Imprimimos salto de línea después de cada string
+            i++;
+        }
+    }
+    return (0);
+}
