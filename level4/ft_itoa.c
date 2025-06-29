@@ -61,7 +61,7 @@ char	*ft_itoa(int nbr)
     str = malloc(len + 1);   // +1 para '\0'
     n = nbr; // Usamos long para manejar INT_MIN
 
-    int (!str)
+    if (!str)
         return (NULL);
     str[len] = '\0';
     if (n < 0)
