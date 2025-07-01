@@ -35,7 +35,7 @@ current → el nodo actual que estamos examinando.
 temp → auxiliar para guardar el nodo a eliminar y luego liberarlo con free.
 */
 
-#include "ft_list_remove_if.h"
+#include "ft_list.h"
 #include <stdlib.h>
 
 void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
@@ -44,33 +44,36 @@ void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
     t_list *prev;
     t_list *current;
 
-    //Elimina los nodos al principio si coinciden con dataref
-    while (*begin_list && cmp(*begin_list)->data, data_ref == 0)
+    // 🧼 Limpiamos las cajitas del principio si hay que quitarlas
+    while (*begin_list && cmp((*begin_list)->data, data_ref) == 0)
     {
         temp = *begin_list;
         *begin_list = (*begin_list)->next;
         free(temp);
     }
-    //Recorre la lista para eliminar los nodos de enmedio
-    prev = *begin_list;
-    if (!prev)
+
+    // 🧱 Si ya no hay más cajitas, terminamos
+    if (!*begin_list)
         return;
 
-    current = current->next; //Inicializa el recorrido
-    while(current)
+    prev = *begin_list;
+    current = prev->next;
+
+    // 🧹 Ahora vamos a limpiar las cajitas del medio
+    while (current)
     {
-        if(cmp(current->data, data_ref) == 0) // si esto se cumple, eliminamos el nodo actual
+        if (cmp(current->data, data_ref) == 0)
         {
             temp = current;
-            prev->next = current->next; // Quita el nodo actual de la lista
-            free(temp);
-            current = prev->next; // actualiza current
+            prev->next = current->next; // Saltamos la cajita actual
+            free(temp);                 // La tiramos a la basura
+            current = prev->next;       // Seguimos con la próxima
         }
         else
         {
-            prev = current; // Avanzamos ambos punteros (prev y current)
-            current = current->next; // Como no se eliminó nada, simplemente pasamos al siguiente nodo.
+            // Nada que borrar, solo seguimos caminando
+            prev = current;
+            current = current->next;
         }
     }
-
 }
