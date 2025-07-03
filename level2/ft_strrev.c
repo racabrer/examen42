@@ -16,24 +16,25 @@ char    *ft_strrev(char *str);
 
 #include <stdio.h>
 
-char    *ft_strrev(char *str)
+char *ft_strrev(char *str)
 {
-	int i;
-	int len;
+	int i = 0;
+	int len = 0;
 	char tmp;
 
-	i = 0;
-	len = 0;
-	while(str[len])
+	// Calcular longitud
+	while (str[len])
 		len++;
-	while (i < len - 1)
+
+	len--; // Último índice
+
+	while (i < len)
 	{
 		tmp = str[i];
-		str[i] = str[len -1];
-		str[len - 1] = tmp;
+		str[i] = str[len];
+		str[len] = tmp;
 		i++;
 		len--;
 	}
-	return(str);
-	
+	return (str);
 }
