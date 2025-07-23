@@ -29,36 +29,39 @@ $> ./rev_wstr | cat -e
 $
 $>
 */
-
 #include <unistd.h>
 
-int main (int argc, char **argv)
+int main(int argc, char **argv)
 {
-    int i;
-    int j;
-    int first_word;
+    int i, j, end;
+    int first = 1;
 
-    i = 0;
-    first_word = 0;
     if (argc == 2)
     {
-        while (argv[1][i] != '\0')
+        i = 0;
+        while (argv[1][i]) // Encuentra el final de la cadena
             i++;
-        i--;
+        i--; // i apunta al último carácter válido
+
         while (i >= 0)
         {
-            while( i >= 0 && (argv[1][i] == ' ' || argv[1][i] == '\t'))
+            // Saltar espacios al final
+            while (i >= 0 && (argv[1][i] == ' ' || argv[1][i] == '\t'))
                 i--;
-            j = i;
-            while (j >= 0 && (argv[1][i] != '\0' || argv[1][i] != '\t'))
-                j--;
-            if (first_word)
-                write (1, " ", 1);
-            write(1, &argv[j + 1], i - j);
-            first_word = 1;
-            i = j;
+            end = i;
+
+            // Buscar el inicio de la palabra
+            while (i >= 0 && argv[1][i] != ' ' && argv[1][i] != '\t')
+                i--;
+
+            if (!first)
+                write(1, " ", 1);
+            else
+                first = 0;
+
+            // Escribir la palabra
+            write(1, &argv[1][i + 1], end - i);
         }
-        
     }
     write(1, "\n", 1);
     return (0);
