@@ -41,14 +41,28 @@ char *ft_strpbrk(const char *s1, const char *s2)
 	while (s1[i])
 	{
 		j = 0;
-		while(s2[j])
+		while (s2[j])
 		{
-			if (s2[j] == s1[i])
-				return((char *)&s1[i]);
+			if (s1[i] == s2[j])
+				return ((char *)&s1[i]);
 			j++;
 		}
 		i++;
 	}
-	write(1, "\n", 1); 
 	return (NULL);
 }
+/*
+#include <stdio.h>
+
+int main(void)
+{
+	const char *str = "abcdefg";
+	const char *charset = "xyzde";
+
+	char *result = ft_strpbrk(str, charset);
+	if (result)
+		printf("Primer coincidencia: '%c'\n", *result); // debe imprimir 'd'
+	else
+		printf("No se encontró ningún carácter coincidente.\n");
+}
+*/
