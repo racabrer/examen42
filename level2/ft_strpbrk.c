@@ -49,5 +49,6 @@ char *ft_strpbrk(const char *s1, const char *s2)
 		}
 		i++;
 	}
+	write(1, "\n", 1); 
 	return (NULL);
 }
