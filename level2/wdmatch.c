@@ -29,25 +29,33 @@ $
 
 #include <unistd.h>
 
-int main(int argc, char **argv)
+int main(int ac, char **av)
 {
-	if (argc == 3)
-	{
-		const char *s1 = argv[1];
-		const char *s2 = argv[2];
-		int len = 0;
-		int i = 0;
+    if (ac == 3)
+    {
+        const char *s1 = av[1];
+        const char *s2 = av[2];
+        int len = 0, i = 0;
 
-		while (s1[len])
-			len++;
-		while (i < len && *s2)
-		{
-			if (s1[i] == *s2++)
-				i++;
-		}
-		if (i == len)
-			write(1, s1, len);
-	}
-	write(1, "\n", 1);
-	return (0);
+        // Calcular la longitud de s1
+        while (s1[len])
+            len++;
+
+        // Comprobar si todos los caracteres de s1 están en s2
+        while (i < len && *s2)
+        {
+            // Si el carácter de s1 coincide con el de s2, avanzar en ambos
+            if (s1[i] == *s2++)
+                i++;
+        }
+
+        // Si todos los caracteres de s1 se han encontrado en s2, imprimir s1
+        if (i == len)
+            write(1, s1, len);
+    }
+
+    // Imprimir salto de línea al final, independientemente del resultado
+    write(1, "\n", 1);
+
+    return (0);
 }
