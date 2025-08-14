@@ -35,18 +35,21 @@ int main(int ac, char **av)
     {
         const char *s1 = av[1];
         const char *s2 = av[2];
-        int len = 0, i = 0;
+        int len = 0, i = 0, j = 0;
 
         // Calcular la longitud de s1
         while (s1[len])
             len++;
 
         // Comprobar si todos los caracteres de s1 están en s2
-        while (i < len && *s2)
+        while (i < len && s2[j])
         {
             // Si el carácter de s1 coincide con el de s2, avanzar en ambos
-            if (s1[i] == *s2++)
+            if (s1[i] == s2[j])
+            {
                 i++;
+            }
+            j++;  // Avanzar siempre el índice de s2
         }
 
         // Si todos los caracteres de s1 se han encontrado en s2, imprimir s1
@@ -59,3 +62,4 @@ int main(int ac, char **av)
 
     return (0);
 }
+
